@@ -94,17 +94,14 @@
             noClickCount++;
             
             let newX, newY;
-            do {
-                newX = Math.random() * (window.innerWidth - noButton.clientWidth);
-                newY = Math.random() * (window.innerHeight - noButton.clientHeight - 100);
-            } while (
-                newX + noButton.clientWidth > yesButton.offsetLeft && 
-                newX < yesButton.offsetLeft + yesButton.clientWidth &&
-                newY + noButton.clientHeight > yesButton.offsetTop && 
-                newY < yesButton.offsetTop + yesButton.clientHeight
-            );
             
-            noButton.style.transform = `translate(${newX}px, ${newY}px)`;
+            newX = Math.random() * 80; // Random percentage for X position
+            newY = Math.random() * 80; // Random percentage for Y position
+            
+            
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${newX}%`;
+            noButton.style.top = `${newY}%`;
             
             yesButton.style.transform = `scale(${1 + noClickCount * 0.25})`;
             
