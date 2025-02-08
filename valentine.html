@@ -36,12 +36,17 @@
         #yes {
             background-color: #ff69b4;
             color: white;
+            <!-- position: absolute; -->
+            <!-- left: 30%; -->
+            <!-- top: 0%; -->
         }
         #no {
             background-color: #ff4444;
             color: white;
             position: absolute;
             padding-right: 20px;
+            left: 58%;
+            top: 0%;
         }
         .hidden {
             display: none;
@@ -66,6 +71,7 @@
             width:400px;
             height:300px;
             display:grid;
+            grid-template-rows: 150px 150px;
             grid-template-columns: 200px 200px;
             grid-row: auto auto;
             <!-- grid-column-gap: 20px; -->
@@ -86,7 +92,7 @@
 </head>
 <body>
     <h1 id="title">Will you be my Valentine?</h1>
-    <img id="question-img" src="images/question.gif">
+    <img id="question-img" src="images/question.gif" width="100%">
     <div class="button-container" id="buttons">
         <button id="yes">Yes</button>
         <button id="no">No</button>
@@ -159,10 +165,10 @@
             questionImg.src = 'images/yes.gif';
             title.innerText = 'I love you baby';
             buttons.style.display = 'none';
+            attachments[0].classList.remove('hidden');
             attachments[1].classList.remove('hidden');
             attachments[2].classList.remove('hidden');
             attachments[3].classList.remove('hidden');
-            attachments[4].classList.remove('hidden');
         });
     </script>
 </body>
