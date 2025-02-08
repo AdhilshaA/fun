@@ -97,8 +97,6 @@
             do {
                 newX = Math.random() * (window.innerWidth - noButton.clientWidth);
                 newY = Math.random() * (window.innerHeight - noButton.clientHeight - 100);
-                newX = Math.max(0, Math.min(newX, window.innerWidth - noButton.clientWidth));
-                newY = Math.max(0, Math.min(newY, window.innerHeight - noButton.clientHeight - 100));
             } while (
                 newX + noButton.clientWidth > yesButton.offsetLeft && 
                 newX < yesButton.offsetLeft + yesButton.clientWidth &&
