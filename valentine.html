@@ -55,21 +55,29 @@
             width: 80%;
             max-width: 250px;
         }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3px;
+            }
     </style>
 </head>
 <body>
     <h1 id="title">Will you be my Valentine?</h1>
-    <img id="question-img" src="question1.png" alt="Will you be my Valentine?">
+    <img id="question-img" src="images/catwithflower-ezgif.com-effects.gif" alt="Will you be my Valentine?">
     <div class="button-container" id="buttons">
         <button id="yes">Yes</button>
         <button id="no">No</button>
     </div>
     
     <div id="attachments">
-        <img class="hidden" src="attachment1.png" alt="Attachment 1">
-        <img class="hidden" src="attachment2.png" alt="Attachment 2">
-        <img class="hidden" src="attachment3.png" alt="Attachment 3">
-        <img class="hidden" src="attachment4.png" alt="Attachment 4">
+        <div class="row grid-container">
+            <img src="images\goma-peach.gif" alt="Attachment 1" class="hidden" width="50%">
+            <img src="images\goma-peach2.gif" alt="Attachment 2" class="hidden" width="50%">
+        </div>
+        <div class="row grid-container">
+            <img src="images\goma-peach3.gif" alt="Attachment 3" class="hidden" width="50%">
+            <img src="images\goma-peach4.gif" alt="Attachment 4" class="hidden" width="50%">
     </div>
     
     <script>
@@ -103,7 +111,7 @@
                 attachments[noClickCount - 1].classList.remove('hidden');
             }
             
-            questionImg.src = `question${noClickCount + 1}.png`;
+            questionImg.src = `question${noClickCount + 1}.gif`;
             
             if (noClickCount >= 5) {
                 noButton.style.display = 'none';
