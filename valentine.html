@@ -41,6 +41,7 @@
             background-color: #ff4444;
             color: white;
             position: absolute;
+            padding-right: 20px;
         }
         .hidden {
             display: none;
@@ -64,7 +65,7 @@
 </head>
 <body>
     <h1 id="title">Will you be my Valentine?</h1>
-    <img id="question-img" src="images/catwithflower-ezgif.com-effects.gif" alt="Will you be my Valentine?">
+    <img id="question-img" src="images/question.gif">
     <div class="button-container" id="buttons">
         <button id="yes">Yes</button>
         <button id="no">No</button>
@@ -111,7 +112,19 @@
                 attachments[noClickCount - 1].classList.remove('hidden');
             }
             
-            questionImg.src = `question${noClickCount + 1}.gif`;
+            if (noClickCount == 1) {
+                title.innerText = 'Why not?';
+                questionImg.src = 'images/question2.gif';
+            } else if (noClickCount == 2) {
+                title.innerText = 'Please?';
+                <!-- questionImg.src = 'images/question3.gif'; -->
+            } else if (noClickCount == 3) {
+                title.innerText = 'Pretty please?';
+                <!-- questionImg.src = 'images/question4.gif'; -->
+            } else if (noClickCount == 4) {
+                title.innerText = 'Just say yes!';
+                <!-- questionImg.src = 'images/question5.gif'; -->
+            }
             
             if (noClickCount >= 5) {
                 noButton.style.display = 'none';
@@ -119,9 +132,13 @@
         });
         
         yesButton.addEventListener('click', () => {
-            questionImg.src = 'yes.png';
+            questionImg.src = 'images/yes.gif';
             title.innerText = 'I love you baby';
             buttons.style.display = 'none';
+            attachments[1].classList.remove('hidden');
+            attachments[2].classList.remove('hidden');
+            attachments[3].classList.remove('hidden');
+            attachments[4].classList.remove('hidden');
         });
     </script>
 </body>
