@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Margarine&family=Nova+Mono&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Valentine's Proposal</title>
@@ -11,6 +14,15 @@
             font-family: 'Comic Neue', cursive;
             background-color: rgb(255, 224, 254);
         }
+        #title {
+
+            font-family: "Margarine", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+
+
         #question-img {
             width: 80%;
             max-width: 300px;
@@ -88,10 +100,11 @@
                 font-family:sans-serif;
             }
         }
+
     </style>
 </head>
 <body>
-    <h1 id="title">Will you be my Valentine?</h1>
+    <h1 id="title">Will you be my Valentine? (˶˃ ᵕ ˂˶)</h1>
     <img id="question-img" src="images/question.gif" width="80%">
     <div class="button-container" id="buttons">
         <button id="yes">Yes</button>
@@ -143,16 +156,16 @@
             }
             
             if (noClickCount == 1) {
-                title.innerText = 'Why not?';
+                title.innerText = 'Why not? ˙◠˙';
                 questionImg.src = 'images/question2.gif';
             } else if (noClickCount == 2) {
                 title.innerText = 'Please?';
                 <!-- questionImg.src = 'images/question3.gif'; -->
             } else if (noClickCount == 3) {
-                title.innerText = 'Pretty please?';
+                title.innerText = "Pretty please? (⁠╥⁠﹏⁠╥⁠)" ;
                 <!-- questionImg.src = 'images/question4.gif'; -->
             } else if (noClickCount == 4) {
-                title.innerText = 'Just say yes!';
+                title.innerText = 'Just say yes, archiiii! (╥‸╥)';
                 <!-- questionImg.src = 'images/question5.gif'; -->
             }
             
@@ -163,7 +176,7 @@
         
         yesButton.addEventListener('click', () => {
             questionImg.src = 'images/yes.gif';
-            title.innerText = 'I love you baby';
+            title.innerText = 'I love you baby! <3';
             buttons.style.display = 'none';
             attachments[0].classList.remove('hidden');
             attachments[1].classList.remove('hidden');
