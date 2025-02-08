@@ -9,7 +9,7 @@
         body {
             text-align: center;
             font-family: 'Comic Neue', cursive;
-            background-color: white;
+            background-color: rgb(255, 224, 254);
         }
         #question-img {
             width: 80%;
@@ -74,11 +74,11 @@
     <div id="attachments">
         <div class="row grid-container">
             <img src="images\goma-peach.gif" alt="Attachment 1" class="hidden" width="50%">
-            <img src="images\goma-peach2.gif" alt="Attachment 2" class="hidden" width="50%">
+            <img src="images\goma-peach3.gif" alt="Attachment 2" class="hidden" width="50%">
         </div>
         <div class="row grid-container">
-            <img src="images\goma-peach3.gif" alt="Attachment 3" class="hidden" width="50%">
-            <img src="images\goma-peach4.gif" alt="Attachment 4" class="hidden" width="50%">
+            <img src="images\goma-peach4.gif" alt="Attachment 3" class="hidden" width="50%">
+            <img src="images\goma-peach2.gif" alt="Attachment 4" class="hidden" width="50%">
     </div>
     
     <script>
@@ -97,6 +97,8 @@
             do {
                 newX = Math.random() * (window.innerWidth - noButton.clientWidth);
                 newY = Math.random() * (window.innerHeight - noButton.clientHeight - 100);
+                newX = Math.max(0, Math.min(newX, window.innerWidth - noButton.clientWidth));
+                newY = Math.max(0, Math.min(newY, window.innerHeight - noButton.clientHeight - 100));
             } while (
                 newX + noButton.clientWidth > yesButton.offsetLeft && 
                 newX < yesButton.offsetLeft + yesButton.clientWidth &&
@@ -106,7 +108,7 @@
             
             noButton.style.transform = `translate(${newX}px, ${newY}px)`;
             
-            yesButton.style.transform = `scale(${1 + noClickCount * 0.2})`;
+            yesButton.style.transform = `scale(${1 + noClickCount * 0.25})`;
             
             if (noClickCount <= attachments.length) {
                 attachments[noClickCount - 1].classList.remove('hidden');
