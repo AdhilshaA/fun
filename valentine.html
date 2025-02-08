@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+        body {
+            text-align: center;
+            font-family: 'Comic Neue', cursive;
+            background-color: white;
+        }
+        #question-img {
+            width: 80%;
+            max-width: 300px;
+            margin: 20px;
+        }
+        .button-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 15px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+        #yes {
+            background-color: #ff69b4;
+            color: white;
+        }
+        #no {
+            background-color: #ff4444;
+            color: white;
+            position: absolute;
+        }
+        .hidden {
+            display: none;
+        }
+        #attachments {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        #attachments img {
+            width: 80%;
+            max-width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="title">Will you be my Valentine?</h1>
+    <img id="question-img" src="question1.png" alt="Will you be my Valentine?">
+    <div class="button-container" id="buttons">
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
+    </div>
+    
+    <div id="attachments">
+        <img class="hidden" src="attachment1.png" alt="Attachment 1">
+        <img class="hidden" src="attachment2.png" alt="Attachment 2">
+        <img class="hidden" src="attachment3.png" alt="Attachment 3">
+        <img class="hidden" src="attachment4.png" alt="Attachment 4">
+    </div>
+    
+    <script>
+        let noClickCount = 0;
+        const noButton = document.getElementById('no');
+        const yesButton = document.getElementById('yes');
+        const questionImg = document.getElementById('question-img');
+        const title = document.getElementById('title');
+        const buttons = document.getElementById('buttons');
+        const attachments = document.querySelectorAll('#attachments img');
+        
+        noButton.addEventListener('click', () => {
+            noClickCount++;
+            
+            let newX, newY;
+            do {
+                newX = Math.random() * (window.innerWidth - noButton.clientWidth);
+                newY = Math.random() * (window.innerHeight - noButton.clientHeight - 100);
+            } while (
+                newX + noButton.clientWidth > yesButton.offsetLeft && 
+                newX < yesButton.offsetLeft + yesButton.clientWidth &&
+                newY + noButton.clientHeight > yesButton.offsetTop && 
+                newY < yesButton.offsetTop + yesButton.clientHeight
+            );
+            
+            noButton.style.transform = `translate(${newX}px, ${newY}px)`;
+            
+            yesButton.style.transform = `scale(${1 + noClickCount * 0.2})`;
+            
+            if (noClickCount <= attachments.length) {
+                attachments[noClickCount - 1].classList.remove('hidden');
+            }
+            
+            questionImg.src = `question${noClickCount + 1}.png`;
+            
+            if (noClickCount >= 5) {
+                noButton.style.display = 'none';
+            }
+        });
+        
+        yesButton.addEventListener('click', () => {
+            questionImg.src = 'yes.png';
+            title.innerText = 'I love you baby';
+            buttons.style.display = 'none';
+        });
+    </script>
+</body>
+</html>
