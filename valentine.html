@@ -21,6 +21,11 @@
             font-style: normal;
         }
 
+        .textfont {
+            font-family: "Margarine", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
 
 
         #question-img {
@@ -105,6 +110,9 @@
 </head>
 <body>
     <h1 id="title">Will you be my Valentine? (˶˃ ᵕ ˂˶)</h1>
+    <div id="title2" class="hidden">
+        <p class="textfont">See you on Thursday! (˶˃ ᵕ ˂˶)</p>
+    </div>
     <img id="question-img" src="images/question.gif">
     <div class="button-container" id="buttons">
         <button id="yes">Yes</button>
@@ -182,6 +190,7 @@
             attachments[1].classList.remove('hidden');
             attachments[2].classList.remove('hidden');
             attachments[3].classList.remove('hidden');
+            title2.classList.remove('hidden');
         });
     </script>
 </body>
