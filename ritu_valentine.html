@@ -1,411 +1,602 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Dum Dum Rituu</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>For Dum Dum Rituu</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #e679a5b7, #f3e8ff);
-  overflow: hidden;
-}
-html, body {
-  height: 100%;
-}
-.scene {
-  position: absolute;
-  width: 100%;
-  height: 100vh;
-  padding: 30px 20px 80px 20px;
-  box-sizing: border-box;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  text-align: center;
+    <style>
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #e679a5b7, #f3e8ff);
+        overflow: hidden;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      .scene {
+        position: absolute;
+        width: 100%;
+        height: 100vh;
+        padding: 30px 20px 80px 20px;
+        box-sizing: border-box;
+        opacity: 0;
+        transition: opacity 0.6s ease;
+        text-align: center;
 
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-  overflow-y: auto;
-}
+        overflow-y: auto;
+      }
 
+      .scene.active {
+        opacity: 1;
+        z-index: 2;
+      }
 
-.scene.active {
-  opacity: 1;
-  z-index: 2;
-}
+      h1,
+      h2 {
+        margin-bottom: 20px;
+      }
 
-h1, h2 {
-  margin-bottom: 20px;
-}
+      button {
+        padding: 12px 22px;
+        border-radius: 25px;
+        border: none;
+        background: #ffd6e8;
+        font-size: 16px;
+        margin: 10px;
+      }
 
-button {
-  padding: 12px 22px;
-  border-radius: 25px;
-  border: none;
-  background: #ffd6e8;
-  font-size: 16px;
-  margin: 10px;
-}
+      .next-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background: #e6d6ff;
+        font-size: 14px;
+        z-index: 10;
+      }
 
-.next-btn {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: #e6d6ff;
-  font-size: 14px;
-  z-index: 10;
-}
+      img {
+        max-width: 100%;
+        border-radius: 20px;
+      }
 
-img {
-  max-width: 100%;
-  border-radius: 20px;
-}
+      .heart {
+        position: fixed;
+        bottom: -30px;
+        font-size: 22px;
+        animation: floatUp linear forwards;
+        pointer-events: none;
+      }
 
-.heart {
-  position: fixed;
-  bottom: -30px;
-  font-size: 22px;
-  animation: floatUp linear forwards;
-  pointer-events: none;
-}
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) translateX(0);
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-110vh) translateX(var(--drift));
+          opacity: 0;
+        }
+      }
 
-@keyframes floatUp {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-110vh) translateX(var(--drift));
-    opacity: 0;
-  }
-}
+      .expand-box {
+        background: #f9f9f9;
+        padding: 12px;
+        border-radius: 15px;
+        margin-top: 8px;
+        display: none;
+        font-size: 14px;
+      }
 
-.expand-box {
-  background: #f9f9f9;
-  padding: 12px;
-  border-radius: 15px;
-  margin-top: 8px;
-  display: none;
-  font-size: 14px;
-}
+      .sticker {
+        width: 120px;
+        margin: 10px;
+      }
 
-.sticker {
-  width: 120px;
-  margin: 10px;
-}
+      video,
+      audio {
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 15px;
+      }
 
-video, audio {
-  width: 100%;
-  margin-top: 20px;
-  border-radius: 15px;
-}
+      .bg-emoji {
+        position: fixed;
+        bottom: -20px;
+        font-size: 18px;
+        opacity: 0.8;
+        animation: bgFloat linear forwards;
+        pointer-events: none;
+        z-index: 0;
+      }
 
-.bg-emoji {
-  position: fixed;
-  bottom: -20px;
-  font-size: 18px;
-  opacity: 0.8;
-  animation: bgFloat linear forwards;
-  pointer-events: none;
-  z-index: 0;
-}
+      @keyframes bgFloat {
+        0% {
+          transform: translateY(0) translateX(0);
+          opacity: 0.15;
+        }
+        100% {
+          transform: translateY(-120vh) translateX(var(--drift));
+          opacity: 0;
+        }
+      }
 
-@keyframes bgFloat {
-  0% {
-    transform: translateY(0) translateX(0);
-    opacity: 0.15;
-  }
-  100% {
-    transform: translateY(-120vh) translateX(var(--drift));
-    opacity: 0;
-  }
-}
+      .float1 {
+        animation-duration: 3.5s;
+      }
+      .float2 {
+        animation-duration: 4.2s;
+      }
+      .float3 {
+        animation-duration: 3.8s;
+      }
 
-.float1 { animation-duration: 3.5s; }
-.float2 { animation-duration: 4.2s; }
-.float3 { animation-duration: 3.8s; }
+      .sticker-photo {
+        width: 220px;
+        padding: 8px;
+        border-radius: 25px;
+        filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.488))
+          drop-shadow(0 0 6px rgba(255, 255, 255, 0.475))
+          drop-shadow(0 10px 18px rgba(0, 0, 0, 0.25));
+      }
 
-.sticker-photo {
-  width: 220px;
-  padding: 8px;
-  border-radius: 25px;
-  filter:
-    drop-shadow(0 0 3px rgba(255, 255, 255, 0.488))
-    drop-shadow(0 0 6px rgba(255, 255, 255, 0.475))
-    drop-shadow(0 10px 18px rgba(0,0,0,0.25));
-}
+      @keyframes gentleFloat {
+        0% {
+          transform: rotate(-1deg) translateY(0px);
+        }
+        25% {
+          transform: rotate(1deg) translateY(-3px);
+        }
+        50% {
+          transform: rotate(-1deg) translateY(-5px);
+        }
+        75% {
+          transform: rotate(1deg) translateY(-3px);
+        }
+        100% {
+          transform: rotate(-1deg) translateY(0px);
+        }
+      }
 
-@keyframes gentleFloat {
-  0%   { transform: rotate(-1deg) translateY(0px); }
-  25%  { transform: rotate(1deg) translateY(-3px); }
-  50%  { transform: rotate(-1deg) translateY(-5px); }
-  75%  { transform: rotate(1deg) translateY(-3px); }
-  100% { transform: rotate(-1deg) translateY(0px); }
-}
+      @keyframes stopMotionTilt {
+        0% {
+          transform: rotate(-2deg);
+        }
+        20% {
+          transform: rotate(1deg);
+        }
+        40% {
+          transform: rotate(-1deg);
+        }
+        60% {
+          transform: rotate(2deg);
+        }
+        80% {
+          transform: rotate(-1deg);
+        }
+        100% {
+          transform: rotate(1deg);
+        }
+      }
 
-@keyframes stopMotionTilt {
-  0%   { transform: rotate(-2deg); }
-  20%  { transform: rotate(1deg); }
-  40%  { transform: rotate(-1deg); }
-  60%  { transform: rotate(2deg); }
-  80%  { transform: rotate(-1deg); }
-  100% { transform: rotate(1deg); }
-}
+      .sticker-photo {
+        animation: gentleFloat 3s ease-in-out infinite;
+      }
+    </style>
+  </head>
 
-.sticker-photo {
-  animation: gentleFloat 3s ease-in-out infinite;
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- SCENE 1 -->
-<!-- <section class="scene active" id="scene1">
+  <body>
+    <!-- SCENE 1 -->
+    <!-- <section class="scene active" id="scene1">
   <h1>Rituu… will you be my Valentine?</h1>
   <button id="yesBtn">YES 💖</button>
   <button id="noBtn">No 🙄</button>
 </section> -->
-<section class="scene active" id="scene1">
-  <h1 id="questionText">Rituu… will you be my Valentine?<br>😚<br>👉👈</h1>
-  <!-- <h4></h4> -->
-  <div id="commentArea" style="min-height:60px; margin-top:10px;"></div>
+    <section class="scene active" id="scene1">
+      <h1 id="questionText">
+        Rituu… will you be my Valentine?<br />😚<br />👉👈
+      </h1>
+      <!-- <h4></h4> -->
+      <div id="commentArea" style="min-height: 60px; margin-top: 10px"></div>
 
-  <div id="buttonArea" style="position:relative; width:100%; height:150px; margin-top:20px;">
-    <button id="yesBtn">YES 💖</button>
-    <button id="noBtn">No 🙄</button>
-  </div>
-</section>
+      <div
+        id="buttonArea"
+        style="position: relative; width: 100%; height: 150px; margin-top: 20px"
+      >
+        <button id="yesBtn">YES 💖</button>
+        <button id="noBtn">No 🙄</button>
+      </div>
+    </section>
 
-<!-- SCENE 2 -->
-<section class="scene" id="scene2">
-  <h2>You.</h2>
-  <img src="assets-ritu/images/pic1.png" id="herPhoto" class="sticker-photo">
-  <p>You are goofy.<br>
-Emotionally intelligent.<br>
-Protective.<br>
-Thoughtful in ways people don’t even notice.<br>
-Sensitive with the people you love.<br>
-And brave in ways you don’t give yourself credit for.</p>
-  <button class="next-btn" onclick="goToScene(3)">Next →</button>
-</section>
+    <!-- SCENE 15 -->
+    <section class="scene" id="scene15">
+      <h1 id="vReveal01">Good..</h1>
+      <h2 id="vReveal02" style="opacity: 0; margin-top: 20px">
+        This was never about Valentine’s.
+      </h2>
+      <h2 id="vReveal03" style="opacity: 0; margin-top: 20px">
+        It was about you.
+      </h2>
 
-<!-- SCENE 3 -->
-<section class="scene" id="scene3">
-  <h2>Valentine's Week</h2>
-  <p>🌹 Rose Day – Delivery in 2 years, 3 months, 21 days.</p>
-  <p>🍫 Chocolate Day – I ate it in your honour.</p>
-  <p>🧸 Teddy Day – Temporary replacement: me.</p>
-  <p>💌 Promise Day – I’m not going anywhere.</p>
-  <p>💋 Kiss Day – Chii chii 🌚</p>
-  <button class="next-btn" onclick="goToScene(4)">Next →</button>
-</section>
+      <button
+        class="next-btn"
+        id="vNextBtn0"
+        style="opacity: 0"
+        onclick="goToScene(2)"
+      >
+        Next →
+      </button>
+    </section>
 
-<!-- SCENE 4 -->
-<section class="scene" id="scene4">
-  <h2>Official Evaluation Report</h2>
-  <p>Candidate: Rituu</p>
-  <p>Position: Being Underrated</p>
-  <p>✔ Emotionally intelligent</p>
-  <p>✔ Excessively thoughtful</p>
-  <p>✔ High sass capacity</p>
-  <p>✔ Can change the world</p>
-  <button onclick="triggerConfetti()">Approve Candidate</button>
-  <button class="next-btn" onclick="goToScene(5)">Next →</button>
-</section>
+    <!-- SCENE 2 -->
+    <section class="scene" id="scene2">
+      <h2>You.</h2>
+      <img
+        src="assets-ritu/images/pic1.png"
+        id="herPhoto"
+        class="sticker-photo"
+      />
+      <p>
+        You are goofy.<br />
+        Emotionally intelligent.<br />
+        Protective.<br />
+        Thoughtful in ways people don’t notice.<br />
+        Sensitive with the people you love.<br />
+        And brave in ways you don’t give yourself credit for.
+      </p>
+      <button class="next-btn" onclick="goToScene(25)">Next →</button>
+    </section>
 
-<!-- SCENE 5 -->
-<section class="scene" id="scene5">
-  <h2>When you overthink</h2>
+    <section class="scene" id="scene25">
+      <h1 id="vReveal1">But…</h1>
+      <h2 id="vReveal2" style="opacity: 0; margin-top: 20px">
+        Since I still want to honour Valentine’s Day…
+      </h2>
+      <h2 id="vReveal3" style="opacity: 0; margin-top: 20px">
+        Here’s something for you.
+      </h2>
 
-  <button onclick="toggleBox('b1')">When you worry about your future</button>
-  <div class="expand-box" id="b1">You are building, not behind.</div>
+      <button
+        class="next-btn"
+        id="vNextBtn"
+        style="opacity: 0"
+        onclick="goToScene(3)"
+      >
+        Next →
+      </button>
+    </section>
 
-  <button onclick="toggleBox('b2')">When you think you're too much</button>
-  <div class="expand-box" id="b2">You just refuse to shrink.</div>
+    <section class="scene" id="scene3">
+      <h2>🌹 Rose Day</h2>
 
-  <button onclick="toggleBox('b3')">When you feel lonely at night</button>
-  <div class="expand-box" id="b3">You have dum dum privileges. Use them.</div>
+      <img src="assets-ritu/images/rose.png" class="sticker-photo float1" />
 
-  <button onclick="toggleBox('b4')">When you feel not enough</button>
-  <div class="expand-box" id="b4">Rare is never “not enough.”</div>
+      <p>
+        I ordered you a rose.<br />
+        It is currently in transit.<br /><br />
+        Expected delivery:<br />
+        10 months, 9 days.<br /><br />
+        Telepathic shipping is complicated.😁
+      </p>
 
-  <button onclick="toggleBox('b5')">When you are angry</button>
-  <div class="expand-box" id="b5">Anger is love with nowhere to land.</div>
+      <button class="next-btn" onclick="goToScene(4)">Next →</button>
+    </section>
 
-  <button class="next-btn" onclick="goToScene(6)">Next →</button>
-</section>
+    <section class="scene" id="scene4">
+      <h2>🍫 Chocolate Day</h2>
 
-<!-- SCENE 6 -->
-<section class="scene" id="scene6">
-  <h2>Evidence Log: Iconic Behavior</h2>
-  <p>You stay up for friends.</p>
-  <p>You remember small details.</p>
-  <p>You send chaotic stickers.</p>
-  <img src="assets-ritu/stickers/kick.gif" class="sticker">
-  <img src="assets-ritu/stickers/hairpull.gif" class="sticker">
-  <p>dum dum rituu & dum dum adhil bhoiyyaa.</p>
-  <button class="next-btn" onclick="goToScene(7)">Next →</button>
-</section>
+      <img
+        src="assets-ritu/images/chocolate.png"
+        class="sticker-photo float2"
+      />
 
-<!-- SCENE 7 -->
-<section class="scene" id="scene7">
-  <h2>Also… respectfully.</h2>
-  <p>You are dangerously pretty.</p>
-  <p>Like scientifically unfair pretty.</p>
-  <p>Anyone who ends up with you better be emotionally trained.</p>
-  <button class="next-btn" onclick="goToScene(8)">Next →</button>
-</section>
+      <p>
+        I had your chocolate.<br>
+        It was very emotional. 🤧<br>
+        I finished it in your honour. 😅
+      </p>
 
-<!-- SCENE 8 -->
-<section class="scene" id="scene8">
-  <h2>You are rare.</h2>
-  <p>Rare things are not meant for everyone.</p>
-  <p>I’m here. Always.</p>
-  <button class="next-btn" onclick="goToScene(9)">Next →</button>
-</section>
+      <button class="next-btn" onclick="goToScene(5)">Next →</button>
+    </section>
 
-<!-- SCENE 9 -->
-<section class="scene" id="scene9">
-  <h2>Play this when you overthink.</h2>
-  <audio controls>
-    <source src="assets-ritu/audio.mp3" type="audio/mp3">
-  </audio>
-  <img src="assets-ritu/images/hug.jpg">
-  <p>Standing next to you. Always.</p>
-</section>
+    <section class="scene" id="scene5">
+      <h2>🧸 Teddy Day</h2>
 
-<script>
-let currentScene = 1;
-function goToScene(n){
-  document.querySelector(".scene.active").classList.remove("active");
-  document.getElementById("scene"+n).classList.add("active");
+      <img src="assets-ritu/images/teddy.png" class="sticker-photo float3" />
 
-  if(n === 2){
-  backgroundEmojis();
-  }
-}
+      <p>Why do you want a teddy, huh?<br>
+      Thats why you have friends for..! 🤗 <br><br>
+      ( Ankita, Trupti.. Get her!)
+      </p>
 
-const yesBtn = document.getElementById("yesBtn");
-const noBtn = document.getElementById("noBtn");
+      <button class="next-btn" onclick="goToScene(6)">Next →</button>
+    </section>
 
-const funnyLines = [
-  "Be serious.",
-  "Why are you chasing this button?",
-  "You're very persistent.",
-  "This is getting awkward."
-];
+    <section class="scene" id="scene6">
+      <h2>💌 Promise Day</h2>
 
-let moveCount = 0;
+      <img src="assets-ritu/images/promise.png" class="sticker-photo float1" />
 
-yesBtn.addEventListener("click", () => {
-  spawnHearts();
-  moveCount++;
+      <p>
+        I promise to:
+        <br />– Roast you when required  <br />– Hype you aggressively <br />–
+        Listen to your rants <br />– Spam stickers endlessly <br />
+        <br />
+        Hehe.. 😁
+      </p>
 
-  if(moveCount <= 4){
-    document.getElementById("commentArea").innerText = funnyLines[moveCount-1];
-  }
+      <button class="next-btn" onclick="goToScene(7)">Next →</button>
+    </section>
 
-  yesBtn.style.position = "absolute";
+    <section class="scene" id="scene7">
+      <h2>💋 Kiss Day</h2>
 
-  const maxX = document.getElementById("buttonArea").offsetWidth - 100;
-  const maxY = document.getElementById("buttonArea").offsetHeight - 50;
+      <p style="font-size: 28px">Chii chii 🌚</p>
 
-  yesBtn.style.left = Math.random()*maxX + "px";
-  yesBtn.style.top = Math.random()*maxY + "px";
+      <button class="next-btn" onclick="goToScene(8)">Next →</button>
+    </section>
 
-  noBtn.style.transform = `scale(${1 + moveCount*0.1})`;
+    <!-- SCENE 8 -->
+    <section class="scene" id="scene8">
+      <h2>Official Evaluation Report</h2>
+      <p>Candidate: Rituu</p>
+      <p>Position: Being Underrated</p>
+      <p>✔ Emotionally intelligent</p>
+      <p>✔ Excessively thoughtful</p>
+      <p>✔ High sass capacity</p>
+      <p>✔ Can change the world</p>
+      <button onclick="triggerConfetti()">Approve Candidate</button>
+      <button class="next-btn" onclick="goToScene(9)">Next →</button>
+    </section>
 
-  if(moveCount >= 4){
-    yesBtn.style.display = "none";
-  }
-});
+    <!-- SCENE 9 -->
+    <section class="scene" id="scene9">
+      <h2>When you overthink</h2>
 
-noBtn.addEventListener("click", () => {
-  if(moveCount === 0){
-    alert("Ouch. That was a little too fast. 😔\nFine.. Now I'm ready. Try again.");
-    moveCount++;
-    return;
-  }
+      <button onclick="toggleBox('b1')">
+        When you worry about your future
+      </button>
+      <div class="expand-box" id="b1">You are building, not behind.</div>
 
-  // Hide both buttons immediately
-  document.getElementById("buttonArea").style.display = "none";
+      <button onclick="toggleBox('b2')">When you think you're too much</button>
+      <div class="expand-box" id="b2">You just refuse to shrink.</div>
 
-  backgroundEmojis();
+      <button onclick="toggleBox('b3')">When you feel lonely at night</button>
+      <div class="expand-box" id="b3">
+        You have dum dum privileges. Use them.
+      </div>
 
-  document.getElementById("questionText").innerText = 
-    "Good.\n This was never about Valentine’s.";
+      <button onclick="toggleBox('b4')">When you feel not enough</button>
+      <div class="expand-box" id="b4">Rare is never “not enough.”</div>
 
-  document.getElementById("commentArea").innerText = "";
+      <button onclick="toggleBox('b5')">When you are angry</button>
+      <div class="expand-box" id="b5">Anger is love with nowhere to land.</div>
 
-  setTimeout(() => {
-    document.getElementById("questionText").innerText = 
-      "It was about you.";
-  }, 3500);
+      <button class="next-btn" onclick="goToScene(10)">Next →</button>
+    </section>
 
-  setTimeout(() => {
-    goToScene(2);
-  }, 6500);
-});
+    <!-- SCENE 10 -->
+    <section class="scene" id="scene10">
+      <h2>Evidence Log: Iconic Behavior</h2>
+      <p>You stay up for friends.</p>
+      <p>You remember small details.</p>
+      <p>You send chaotic stickers.</p>
+      <img src="assets-ritu/stickers/kick.gif" class="sticker" />
+      <img src="assets-ritu/stickers/hairpull.gif" class="sticker" />
+      <p>dum dum rituu & dum dum adhil bhoiyyaa.</p>
+      <button class="next-btn" onclick="goToScene(11)">Next →</button>
+    </section>
 
-function spawnHearts() {
-  const emojis = ["💖","💘","🌸","✨","💝"];
+    <!-- SCENE 11 -->
+    <section class="scene" id="scene11">
+      <h2>Also… respectfully.</h2>
+      <p>You are dangerously pretty.</p>
+      <p>Like scientifically unfair pretty.</p>
+      <p>
+        Like walk into a room and ruin someone's emotional stability pretty.
+      </p>
+      <p>Anyone who ends up with you better be ready to obsessed.</p>
+      <button class="next-btn" onclick="goToScene(12)">Next →</button>
+    </section>
 
-  for (let i = 0; i < 15; i++) {
-    setTimeout(() => {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+    <!-- SCENE 12 -->
+    <section class="scene" id="scene12">
+      <h2>Play this when you overthink.</h2>
+      <audio controls>
+        <source src="assets-ritu/audio.mp3" type="audio/mp3" />
+      </audio>
+      <button class="next-btn" onclick="goToScene(13)">Next →</button>
+    </section>
 
-      heart.style.left = Math.random()*100 + "vw";
-      heart.style.fontSize = (18 + Math.random()*5) + "px";
-      heart.style.animationDuration = (2 + Math.random()*2) + "s";
-      heart.style.setProperty("--drift", (Math.random()*80 - 40) + "px");
+    <!-- SCENE 13 -->
+    <section class="scene" id="scene13">
+      <img src="assets-ritu/images/hug.jpg" />
+      <p>I will be there for you. Always.</p>
+    </section>
 
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 4000);
-    }, i * 120);
-  }
-}
+    <script>
+      let currentScene = 1;
+      backgroundEmojis();
+      function goToScene(n) {
+        document.querySelector(".scene.active").classList.remove("active");
+        document.getElementById("scene" + n).classList.add("active");
 
-function triggerConfetti(){
-  confetti({particleCount:100,spread:70,origin:{y:0.6}});
-}
+        if (n === 2) {
+          backgroundEmojis();
+        }
 
-function toggleBox(id){
-  const box=document.getElementById(id);
-  box.style.display = box.style.display==="block"?"none":"block";
-}
+        // Scene 1.5 reveal
+        if (n === 15) {
+          setTimeout(() => {
+            document.getElementById("vReveal01").style.opacity = "1";
+            document.getElementById("vReveal01").style.transition =
+              "opacity 1.5s ease";
+          }, 500);
+          setTimeout(() => {
+            document.getElementById("vReveal02").style.opacity = "1";
+            document.getElementById("vReveal02").style.transition =
+              "opacity 1.5s ease";
+          }, 2000);
+          setTimeout(() => {
+            document.getElementById("vReveal03").style.opacity = "1";
+            document.getElementById("vReveal03").style.transition =
+              "opacity 1.5s ease";
+          }, 4000);
+          setTimeout(() => {
+            document.getElementById("vNextBtn0").style.opacity = "1";
+            document.getElementById("vNextBtn0").style.transition =
+              "opacity 1s ease";
+          }, 5500);
+        }
 
-document.getElementById("herPhoto").addEventListener("click", spawnHearts);
+        // Scene 2 reveal
+        if (n === 2) {
+          setTimeout(() => {
+            document.getElementById("revealText2").style.opacity = "1";
+            document.getElementById("revealText2").style.transition =
+              "opacity 1.5s ease";
+          }, 3500);
 
+          setTimeout(() => {
+            goToScene(25);
+          }, 6500);
+        }
 
-function backgroundEmojis(){
-  const emojis = ["💖","✨","🌸"];
-  
-  setInterval(() => {
-    const el = document.createElement("div");
-    el.classList.add("bg-emoji");
-    el.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+        // Scene 2.5 reveal
+        if (n === 25) {
+          setTimeout(() => {
+            document.getElementById("vReveal2").style.opacity = "1";
+            document.getElementById("vReveal2").style.transition =
+              "opacity 1.5s ease";
+          }, 2000);
 
-    el.style.left = Math.random()*100 + "vw";
-    el.style.animationDuration = (6 + Math.random()*6) + "s";
-    el.style.setProperty("--drift", (Math.random()*60 - 30) + "px");
+          setTimeout(() => {
+            document.getElementById("vReveal3").style.opacity = "1";
+            document.getElementById("vReveal3").style.transition =
+              "opacity 1.5s ease";
+          }, 4000);
 
-    document.body.appendChild(el);
-    setTimeout(()=>el.remove(),12000);
-  }, 500);
-}
-</script>
+          setTimeout(() => {
+            document.getElementById("vNextBtn").style.opacity = "1";
+            document.getElementById("vNextBtn").style.transition =
+              "opacity 1s ease";
+          }, 5500);
+        }
+      }
 
-</body>
+      const yesBtn = document.getElementById("yesBtn");
+      const noBtn = document.getElementById("noBtn");
+
+      const funnyLines = [
+        "Be serious.",
+        "Why are you chasing this button?",
+        "You're very persistent.",
+        "This is getting awkward.",
+      ];
+
+      let moveCount = 0;
+
+      yesBtn.addEventListener("click", () => {
+        spawnHearts();
+        moveCount++;
+
+        if (moveCount <= 4) {
+          document.getElementById("commentArea").innerText =
+            funnyLines[moveCount - 1];
+        }
+
+        yesBtn.style.position = "absolute";
+
+        const maxX = document.getElementById("buttonArea").offsetWidth - 100;
+        const maxY = document.getElementById("buttonArea").offsetHeight - 50;
+
+        yesBtn.style.left = Math.random() * maxX + "px";
+        yesBtn.style.top = Math.random() * maxY + "px";
+
+        noBtn.style.transform = `scale(${1 + moveCount * 0.1})`;
+
+        if (moveCount >= 4) {
+          yesBtn.style.display = "none";
+        }
+      });
+
+      noBtn.addEventListener("click", () => {
+        if (moveCount === 0) {
+          alert(
+            "Ouch. That was a little too fast. 😔\nFine.. Now I'm ready. Try again.",
+          );
+          moveCount++;
+          return;
+        }
+
+        // Hide both buttons immediately
+        document.getElementById("buttonArea").style.display = "none";
+
+        goToScene(15);
+      });
+
+      function spawnHearts() {
+        const emojis = ["💖", "💘", "🌸", "✨", "💝"];
+
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => {
+            const heart = document.createElement("div");
+            heart.classList.add("heart");
+            heart.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.fontSize = 18 + Math.random() * 5 + "px";
+            heart.style.animationDuration = 2 + Math.random() * 2 + "s";
+            heart.style.setProperty("--drift", Math.random() * 80 - 40 + "px");
+
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 4000);
+          }, i * 120);
+        }
+      }
+
+      function triggerConfetti() {
+        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+      }
+
+      function toggleBox(id) {
+        const box = document.getElementById(id);
+        box.style.display = box.style.display === "block" ? "none" : "block";
+      }
+
+      document
+        .getElementById("herPhoto")
+        .addEventListener("click", spawnHearts);
+
+      function backgroundEmojis() {
+        const emojis = ["💖", "✨", "🌸"];
+
+        setInterval(() => {
+          const el = document.createElement("div");
+          el.classList.add("bg-emoji");
+          el.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+
+          el.style.left = Math.random() * 100 + "vw";
+          el.style.animationDuration = 6 + Math.random() * 6 + "s";
+          el.style.setProperty("--drift", Math.random() * 60 - 30 + "px");
+
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 12000);
+        }, 500);
+      }
+    </script>
+  </body>
 </html>
