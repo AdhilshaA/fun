@@ -20,16 +20,20 @@ body {
   position: absolute;
   width: 100%;
   height: 100vh;
-  padding: 30px 20px 60px 20px;
+  padding: 30px 20px 80px 20px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   opacity: 0;
   transition: opacity 0.6s ease;
   text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  overflow-y: auto;
 }
+
 
 .scene.active {
   opacity: 1;
@@ -50,11 +54,12 @@ button {
 }
 
 .next-btn {
-  position: absolute;
+  position: fixed;
   bottom: 20px;
   right: 20px;
   background: #e6d6ff;
   font-size: 14px;
+  z-index: 10;
 }
 
 img {
@@ -64,14 +69,19 @@ img {
 
 .heart {
   position: fixed;
-  top: -10px;
-  font-size: 20px;
-  animation: fall 2s linear forwards;
+  bottom: -30px;
+  font-size: 22px;
+  animation: floatUp linear forwards;
+  pointer-events: none;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-110vh) translateX(var(--drift));
     opacity: 0;
   }
 }
@@ -101,10 +111,20 @@ video, audio {
 <body>
 
 <!-- SCENE 1 -->
-<section class="scene active" id="scene1">
+<!-- <section class="scene active" id="scene1">
   <h1>Rituu… will you be my Valentine?</h1>
   <button id="yesBtn">YES 💖</button>
   <button id="noBtn">No 🙄</button>
+</section> -->
+<section class="scene active" id="scene1">
+  <h1 id="questionText">Rituu… will you be my Valentine?</h1>
+
+  <div id="commentArea" style="min-height:60px; margin-top:10px;"></div>
+
+  <div id="buttonArea" style="position:relative; width:100%; height:150px; margin-top:20px;">
+    <button id="yesBtn">YES 💖</button>
+    <button id="noBtn">No 🙄</button>
+  </div>
 </section>
 
 <!-- SCENE 2 -->
@@ -209,37 +229,75 @@ function goToScene(n){
 
 const yesBtn = document.getElementById("yesBtn");
 const noBtn = document.getElementById("noBtn");
+
+const funnyLines = [
+  "Be serious.",
+  "Why are you chasing this button?",
+  "This is getting awkward.",
+  "You're very persistent."
+];
+
 let moveCount = 0;
 
 yesBtn.addEventListener("click", () => {
-  moveCount++;
-  yesBtn.style.position = "absolute";
-  yesBtn.style.left = Math.random()*80 + "%";
-  yesBtn.style.top = Math.random()*80 + "%";
   spawnHearts();
+  moveCount++;
 
-  if(moveCount >= 5){
-    yesBtn.style.display="none";
-    triggerConfetti();
+  if(moveCount <= 4){
+    document.getElementById("commentArea").innerText = funnyLines[moveCount-1];
+  }
+
+  yesBtn.style.position = "absolute";
+
+  const maxX = document.getElementById("buttonArea").offsetWidth - 100;
+  const maxY = document.getElementById("buttonArea").offsetHeight - 50;
+
+  yesBtn.style.left = Math.random()*maxX + "px";
+  yesBtn.style.top = Math.random()*maxY + "px";
+
+  noBtn.style.transform = `scale(${1 + moveCount*0.1})`;
+
+  if(moveCount >= 4){
+    yesBtn.style.display = "none";
   }
 });
 
 noBtn.addEventListener("click", () => {
   if(moveCount === 0){
     alert("Ouch. That was a little too fast. 😔 Try again.");
-  } else {
-    goToScene(2);
+    return;
   }
+
+  document.getElementById("questionText").innerText = "This was never about Valentine’s.";
+
+  document.getElementById("commentArea").innerText = "";
+
+  setTimeout(() => {
+    document.getElementById("questionText").innerText = "It was about you.";
+  }, 3500);
+
+  setTimeout(() => {
+    goToScene(2);
+  }, 6500);
 });
 
-function spawnHearts(){
-  for(let i=0;i<10;i++){
-    const heart=document.createElement("div");
-    heart.innerHTML="💖";
-    heart.classList.add("heart");
-    heart.style.left=Math.random()*100+"vw";
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),2000);
+function spawnHearts() {
+  const emojis = ["💖","💘","🌸","✨","💝"];
+
+  for (let i = 0; i < 15; i++) {
+    setTimeout(() => {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+
+      heart.style.left = Math.random()*100 + "vw";
+      heart.style.fontSize = (18 + Math.random()*20) + "px";
+      heart.style.animationDuration = (2 + Math.random()*2) + "s";
+      heart.style.setProperty("--drift", (Math.random()*80 - 40) + "px");
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 4000);
+    }, i * 120);
   }
 }
 
