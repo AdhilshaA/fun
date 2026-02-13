@@ -112,7 +112,7 @@ video, audio {
   position: fixed;
   bottom: -20px;
   font-size: 18px;
-  opacity: 0.6;
+  opacity: 0.8;
   animation: bgFloat linear forwards;
   pointer-events: none;
   z-index: 0;
@@ -127,6 +127,41 @@ video, audio {
     transform: translateY(-120vh) translateX(var(--drift));
     opacity: 0;
   }
+}
+
+.float1 { animation-duration: 3.5s; }
+.float2 { animation-duration: 4.2s; }
+.float3 { animation-duration: 3.8s; }
+
+.sticker-photo {
+  width: 220px;
+  padding: 8px;
+  border-radius: 25px;
+  filter:
+    drop-shadow(0 0 3px rgba(255, 255, 255, 0.488))
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.475))
+    drop-shadow(0 10px 18px rgba(0,0,0,0.25));
+}
+
+@keyframes gentleFloat {
+  0%   { transform: rotate(-1deg) translateY(0px); }
+  25%  { transform: rotate(1deg) translateY(-3px); }
+  50%  { transform: rotate(-1deg) translateY(-5px); }
+  75%  { transform: rotate(1deg) translateY(-3px); }
+  100% { transform: rotate(-1deg) translateY(0px); }
+}
+
+@keyframes stopMotionTilt {
+  0%   { transform: rotate(-2deg); }
+  20%  { transform: rotate(1deg); }
+  40%  { transform: rotate(-1deg); }
+  60%  { transform: rotate(2deg); }
+  80%  { transform: rotate(-1deg); }
+  100% { transform: rotate(1deg); }
+}
+
+.sticker-photo {
+  animation: gentleFloat 3s ease-in-out infinite;
 }
 
 </style>
@@ -154,8 +189,13 @@ video, audio {
 <!-- SCENE 2 -->
 <section class="scene" id="scene2">
   <h2>You.</h2>
-  <img src="assets/images/pic1.jpg" id="herPhoto">
-  <p>You are goofy, emotionally intelligent, protective, thoughtful, funny, and stronger than you think.</p>
+  <img src="assets-ritu/images/pic1.png" id="herPhoto" class="sticker-photo">
+  <p>You are goofy.<br>
+Emotionally intelligent.<br>
+Protective.<br>
+Thoughtful in ways people don’t even notice.<br>
+Sensitive with the people you love.<br>
+And brave in ways you don’t give yourself credit for.</p>
   <button class="next-btn" onclick="goToScene(3)">Next →</button>
 </section>
 
@@ -211,8 +251,8 @@ video, audio {
   <p>You stay up for friends.</p>
   <p>You remember small details.</p>
   <p>You send chaotic stickers.</p>
-  <img src="assets/stickers/kick.gif" class="sticker">
-  <img src="assets/stickers/hairpull.gif" class="sticker">
+  <img src="assets-ritu/stickers/kick.gif" class="sticker">
+  <img src="assets-ritu/stickers/hairpull.gif" class="sticker">
   <p>dum dum rituu & dum dum adhil bhoiyyaa.</p>
   <button class="next-btn" onclick="goToScene(7)">Next →</button>
 </section>
@@ -238,9 +278,9 @@ video, audio {
 <section class="scene" id="scene9">
   <h2>Play this when you overthink.</h2>
   <audio controls>
-    <source src="assets/audio.mp3" type="audio/mp3">
+    <source src="assets-ritu/audio.mp3" type="audio/mp3">
   </audio>
-  <img src="assets/images/hug.jpg">
+  <img src="assets-ritu/images/hug.jpg">
   <p>Standing next to you. Always.</p>
 </section>
 
@@ -292,7 +332,7 @@ yesBtn.addEventListener("click", () => {
 
 noBtn.addEventListener("click", () => {
   if(moveCount === 0){
-    alert("Ouch. That was a little too fast. 😔 Fine.. Now I'm ready. Try again.");
+    alert("Ouch. That was a little too fast. 😔\nFine.. Now I'm ready. Try again.");
     moveCount++;
     return;
   }
@@ -303,7 +343,7 @@ noBtn.addEventListener("click", () => {
   backgroundEmojis();
 
   document.getElementById("questionText").innerText = 
-    "Good. This was never about Valentine’s.";
+    "Good.\n This was never about Valentine’s.";
 
   document.getElementById("commentArea").innerText = "";
 
