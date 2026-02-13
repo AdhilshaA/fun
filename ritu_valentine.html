@@ -101,10 +101,17 @@
         display: none;
         font-size: 14px;
       }
+      .sticker-row {
+        display: flex;
+        justify-content: center;   /* horizontal center */
+        align-items: center;       /* vertical alignment */
+        gap: 20px;                 /* spacing between them */
+        margin: 20px 0;
+      }
 
       .sticker {
-        width: 120px;
-        margin: 10px;
+        height: 120px;
+        display: block;            /* removes inline baseline weirdness */
       }
 
       video,
@@ -407,40 +414,62 @@
     <section class="scene" id="scene10">
       <h2>Evidence Log: <br>Iconic Behavior</h2>
       <p>- You stay up for your friends at 2am. <br>
-      - You hype people when they doubt themselves.. <br>
+      - You hype people even when they doubt themselves. <br>
       - You protect the ones you love like a villain with morals. <br>
-      - You send chaotic stickers and act innocent.<br>
-      - You act shy but could run the world if you tried.<br>
-      <img src="assets-ritu/stickers/kick.gif" class="sticker" />
-      <img src="assets-ritu/stickers/hairpull.gif" class="sticker" />
-      <p>dum dum rituu & dum dum adhil bhoiyyaa.</p>
+      - You doubt yourself but can run the world if you tried.<br>
+      - You send the most chaotic stickers and act innocent.<br>
+      <div class="sticker-row">
+        <img src="assets-ritu/stickers/kick.gif" class="sticker">
+        <img src="assets-ritu/stickers/hairpull.gif" class="sticker">
+      </div>
       <button class="next-btn" onclick="goToScene(11)">Next →</button>
     </section>
 
     <!-- SCENE 11 -->
     <section class="scene" id="scene11">
       <h2>Also… respectfully.</h2>
-      <p>You are dangerously pretty.</p>
-      <p>Like scientifically unfair pretty.</p>
-      <p>
+      <img src="assets-ritu/images/pretty.png" class="sticker-photo" style="height: 300px; width: auto;"/>
+
+      <p>You are dangerously pretty. <br>
+        Like scientifically unfair pretty. <br>
         Like walk into a room and ruin someone's emotional stability pretty.
       </p>
-      <p>Anyone who ends up with you better be ready to obsessed.</p>
+      <p>Anyone who ends up with you.. <br>
+        ..better be ready to obsessed!</p>
       <button class="next-btn" onclick="goToScene(12)">Next →</button>
     </section>
 
     <!-- SCENE 12 -->
     <section class="scene" id="scene12">
-      <h2>Play this when you overthink.</h2>
+      <h2>A note from your nemesis.</h2>
       <audio controls>
-        <source src="assets-ritu/audio.mp3" type="audio/mp3" />
+        <source src="assets-ritu\Valentines-audio.mp3" type="audio/mp3" />
       </audio>
-      <button class="next-btn" onclick="goToScene(13)">Next →</button>
+      <button class="next-btn" onclick="goToScene(125)">Next →</button>
+    </section>
+
+    <!-- SCENE 12.5 -->
+    <section class="scene" id="scene125">
+      <h1 id="vReveal121">Well..</h1>
+      <h2 id="vReveal122" style="opacity: 0; margin-top: 20px">
+        We are almost there.
+      </h2>
+      <h2 id="vReveal123" style="opacity: 0; margin-top: 20px">
+        Just one more thing.
+      </h2>
+      <button
+        class="next-btn"
+        id="vNextBtn120"
+        style="opacity: 0"
+        onclick="goToScene(13)"
+      >
+        Next →
+      </button>
     </section>
 
     <!-- SCENE 13 -->
     <section class="scene" id="scene13">
-      <img src="assets-ritu/images/hug.jpg" />
+      <img src="assets-ritu/images/hug.png" />
       <p>I will be there for you. Always.</p>
     </section>
 
@@ -481,15 +510,11 @@
 
         // Scene 2 reveal
         if (n === 2) {
-          setTimeout(() => {
-            document.getElementById("revealText2").style.opacity = "1";
-            document.getElementById("revealText2").style.transition =
-              "opacity 1.5s ease";
-          }, 3500);
+          
 
           setTimeout(() => {
             goToScene(25);
-          }, 6500);
+          }, 500);
         }
 
         // Scene 2.5 reveal
@@ -509,6 +534,32 @@
           setTimeout(() => {
             document.getElementById("vNextBtn").style.opacity = "1";
             document.getElementById("vNextBtn").style.transition =
+              "opacity 1s ease";
+          }, 5500);
+        }
+
+        if (n === 125) {
+          setTimeout(() => {
+            document.getElementById("vReveal122").style.opacity = "1";
+            document.getElementById("vReveal122").style.transition =
+              "opacity 1.5s ease";
+          }, 2000);
+
+          setTimeout(() => {
+            document.getElementById("vReveal123").style.opacity = "1";
+            document.getElementById("vReveal123").style.transition =
+              "opacity 1.5s ease";
+          }, 4000);
+
+          setTimeout(() => {
+            document.getElementById("vNextBtn120").style.opacity = "1";
+            document.getElementById("vNextBtn120").style.transition =
+              "opacity 1s ease";
+          }, 5500);
+
+          setTimeout(() => {
+            document.getElementById("vNextBtn120").style.opacity = "1";
+            document.getElementById("vNextBtn120").style.transition =
               "opacity 1s ease";
           }, 5500);
         }
