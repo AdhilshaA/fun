@@ -26,7 +26,7 @@
         position: absolute;
         width: 100%;
         height: 100vh;
-        padding: 30px 20px 80px 20px;
+        padding: 0px 20px 80px 20px;
         box-sizing: border-box;
         opacity: 0;
         transition: opacity 0.6s ease;
@@ -94,9 +94,10 @@
 
       .expand-box {
         background: #f9f9f9;
-        padding: 12px;
+        padding: 12px 20px;
+        width: 80%;
         border-radius: 15px;
-        margin-top: 8px;
+        margin-top: 2px;
         display: none;
         font-size: 14px;
       }
@@ -362,35 +363,41 @@
       </p>
 
       <p>Assessment:<br /> 
-        Overqualified.<br /> 
-        Market unable to afford.
+        <i>Overqualified.<br /> 
+        Market unable to afford.</i>
       </p>
-      <button onclick="triggerConfetti()">✅ Approve Candidate</button>
+      <button onclick="triggerConfetti()" style="background: #e97da6;">✅ Approve Candidate</button>
       <button class="next-btn" onclick="goToScene(9)">Next →</button>
     </section>
 
     <!-- SCENE 9 -->
     <section class="scene" id="scene9">
-      <h2>When you overthink</h2>
+      <h2>Tap. Tap. Tap.</h2>
 
-      <button onclick="toggleBox('b1')">
-        When you worry about your future
+      <button onclick="toggleBox('b1')" style="width: 80%;">
+        "The future... is scary and dark.."
       </button>
       <div class="expand-box" id="b1">You are building, not behind.</div>
+      
+      <button onclick="toggleBox('b2')" style="width: 80%;">"Maybe I'm too much.."</button>
+      <div class="expand-box" id="b2">You are supposed to be you.<br> They are supposed to love you for that.</div>
 
-      <button onclick="toggleBox('b2')">When you think you're too much</button>
-      <div class="expand-box" id="b2">You just refuse to shrink.</div>
+      
+      <button onclick="toggleBox('b5')" style="width: 80%;">"Ughh.. I feel angry!"</button>
+      <div class="expand-box" id="b5">Just breathe.. It will pass. <br>If it doesn't, I'm here.</div>
 
-      <button onclick="toggleBox('b3')">When you feel lonely at night</button>
+      <button onclick="toggleBox('b3')" style="width: 80%;">"It feels so lonely tonight"</button>
       <div class="expand-box" id="b3">
-        You have dum dum privileges. Use them.
+        You have dum dum privileges with me. <br />
+        Use them!
       </div>
 
-      <button onclick="toggleBox('b4')">When you feel not enough</button>
-      <div class="expand-box" id="b4">Rare is never “not enough.”</div>
+      <button onclick="toggleBox('b4')" style="width: 80%;">"Am I not enough?"</button>
+      <div class="expand-box" id="b4">
+        You are more than enough. You are so much. <br />
+        Anyone who can't see that doesn't deserve you.
+      </div>
 
-      <button onclick="toggleBox('b5')">When you are angry</button>
-      <div class="expand-box" id="b5">Anger is love with nowhere to land.</div>
 
       <button class="next-btn" onclick="goToScene(10)">Next →</button>
     </section>
