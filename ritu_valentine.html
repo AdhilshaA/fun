@@ -203,6 +203,45 @@
       .sticker-photo {
         animation: gentleFloat 3s ease-in-out infinite;
       }
+
+      .pretty-container {
+        position: relative;
+        display: inline-block;
+      }
+
+      .angry-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        transform: translate(-50%, -50%);
+        background: rgba(255,255,255,0.95);
+        padding: 15px;
+        border-radius: 20px;
+        text-align: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+        z-index: 5;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+      }
+
+      .angry-sticker {
+        width: 50%;
+        margin-bottom: 10px;
+      }
+
+      .angry-overlay.show {
+        opacity: 1;
+        animation: angryPop 0.4s ease;
+      }
+
+      @keyframes angryPop {
+        0% { transform: translate(-50%, -50%) scale(0.7); }
+        60% { transform: translate(-50%, -50%) scale(1.1); }
+        100% { transform: translate(-50%, -50%) scale(1); }
+      }
+
     </style>
   </head>
 
@@ -428,7 +467,16 @@
     <!-- SCENE 11 -->
     <section class="scene" id="scene11">
       <h2>Also… respectfully.</h2>
-      <img src="assets-ritu/images/pretty.png" class="sticker-photo" style="height: 300px; width: auto;"/>
+
+      <div class="pretty-container">
+        <img src="assets-ritu/images/pretty.png" id="prettyPhoto" class="sticker-photo" style="height: 300px; width: auto;"/>
+        
+        <div id="angryOverlay" class="angry-overlay">
+          <img src="assets-ritu/stickers/angry.png" class="angry-sticker">
+          <p>Stop touching my best friend 😡</p>
+        </div>
+      </div>
+      
 
       <p>You are dangerously pretty. <br>
         Like scientifically unfair pretty. <br>
@@ -657,6 +705,25 @@
           setTimeout(() => el.remove(), 12000);
         }, 500);
       }
+
+      let prettyTapCount = 0;
+
+      const prettyPhoto = document.getElementById("prettyPhoto");
+      const angryOverlay = document.getElementById("angryOverlay");
+
+      prettyPhoto.addEventListener("click", () => {
+        prettyTapCount++;
+
+        if(prettyTapCount === 7){
+          angryOverlay.classList.add("show");
+
+          setTimeout(() => {
+            angryOverlay.classList.remove("show");
+            prettyTapCount = 0; // reset for next time
+          }, 3000);
+        }
+      });
+
     </script>
   </body>
 </html>
