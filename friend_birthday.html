@@ -95,7 +95,6 @@
       .friends-shell {
         position: relative;
         overflow: hidden;
-        height: auto;
       }
 
       #scene1 .scene-inner {
@@ -216,18 +215,7 @@
 
       .friends-shell {
         width: min(920px, 100%);
-      }
-
-      #scene2 {
-        align-items: flex-start;
-        justify-content: center;
-        padding-top: 8px;
-        padding-bottom: 8px;
-      }
-
-      #scene2 .scene-inner {
-        width: min(920px, 100%);
-        height: auto;
+        height: 100%;
       }
 
       .friend-grid {
@@ -382,12 +370,6 @@
           padding: 10px;
         }
 
-        #scene2 {
-          align-items: flex-start;
-          padding-top: 6px;
-          padding-bottom: 6px;
-        }
-
         .friends-shell {
           padding: 12px;
         }
@@ -533,7 +515,7 @@
 
           <div class="friend-grid" id="friendGrid">
             <button class="friend-card" data-friend="friend2">
-              <img src="images/goma-peach.gif" alt="Friend sticker one" />
+              <img src="images/goma-peach.gif" alt="Friend sticker one" style="width:100%;"/>
               <span class="friend-name">Idiot One</span>
               <span class="friend-hint">The loud one</span>
             </button>
