@@ -89,6 +89,11 @@
         padding: clamp(20px, 4vw, 34px);
       }
 
+      .friends-shell {
+        position: relative;
+        overflow: hidden;
+      }
+
       .eyebrow {
         display: inline-block;
         margin: 0 0 10px;
@@ -229,20 +234,25 @@
       }
 
       .spotlight {
-        margin-top: 26px;
+        position: absolute;
+        inset: 0;
+        padding: clamp(20px, 4vw, 34px);
         display: grid;
         gap: 18px;
         align-items: center;
         justify-items: center;
         opacity: 0;
-        transform: translateY(24px) scale(0.92);
+        transform: scale(0.96);
         pointer-events: none;
         transition: opacity 0.35s ease, transform 0.35s ease;
+        background: rgba(255, 249, 253, 0.78);
+        backdrop-filter: blur(10px);
+        z-index: 5;
       }
 
       .spotlight.show {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: scale(1);
         pointer-events: auto;
       }
 
@@ -376,7 +386,6 @@
         }
 
         .spotlight {
-          margin-top: 16px;
           gap: 10px;
         }
 
