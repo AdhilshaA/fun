@@ -95,6 +95,7 @@
       .friends-shell {
         position: relative;
         overflow: hidden;
+        height: auto;
       }
 
       #scene1 .scene-inner {
@@ -215,7 +216,18 @@
 
       .friends-shell {
         width: min(920px, 100%);
-        height: 100%;
+      }
+
+      #scene2 {
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 8px;
+        padding-bottom: 8px;
+      }
+
+      #scene2 .scene-inner {
+        width: min(920px, 100%);
+        height: auto;
       }
 
       .friend-grid {
@@ -368,6 +380,12 @@
       @media (max-width: 720px) {
         .scene {
           padding: 10px;
+        }
+
+        #scene2 {
+          align-items: flex-start;
+          padding-top: 6px;
+          padding-bottom: 6px;
         }
 
         .friends-shell {
