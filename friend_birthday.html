@@ -42,7 +42,7 @@
           radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), transparent 38%),
           radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.4), transparent 30%),
           linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
-        overflow-x: hidden;
+        overflow: hidden;
       }
 
       button,
@@ -55,14 +55,16 @@
       }
 
       .scene {
-        min-height: 100vh;
+        height: calc(var(--vh, 1vh) * 100);
+        min-height: calc(var(--vh, 1vh) * 100);
         width: 100%;
         position: absolute;
         inset: 0;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.45s ease, transform 0.45s ease;
-        padding: 32px 18px 40px;
+        padding: 18px 14px;
+        overflow: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -77,6 +79,7 @@
       .scene-inner {
         width: min(980px, 100%);
         text-align: center;
+        max-height: 100%;
       }
 
       .hero-shell,
@@ -86,7 +89,7 @@
         border: 1px solid rgba(255, 255, 255, 0.55);
         border-radius: 32px;
         box-shadow: var(--shadow);
-        padding: clamp(20px, 4vw, 34px);
+        padding: clamp(16px, 3vw, 28px);
       }
 
       .friends-shell {
@@ -134,8 +137,8 @@
       }
 
       .hero-sticker {
-        width: min(300px, 72vw);
-        margin: 26px auto 20px;
+        width: min(240px, 56vw);
+        margin: 16px auto 14px;
         display: block;
         filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.18));
         animation: floaty 4s ease-in-out infinite;
@@ -177,11 +180,11 @@
       }
 
       .intro-actions {
-        margin-top: 24px;
+        margin-top: 16px;
       }
 
       .scene-copy {
-        margin-bottom: 24px;
+        margin-bottom: 16px;
       }
 
       .friends-header p {
@@ -189,11 +192,15 @@
         margin-bottom: 0;
       }
 
+      .friends-shell {
+        width: min(920px, 100%);
+      }
+
       .friend-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-        margin-top: 24px;
+        gap: 12px;
+        margin-top: 16px;
         transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
       }
 
@@ -207,17 +214,17 @@
       .friend-card {
         background: var(--card-strong);
         border-radius: 28px;
-        padding: 18px 16px 16px;
+        padding: 14px 12px 12px;
         text-align: center;
         box-shadow: 0 18px 38px rgba(56, 36, 62, 0.11);
       }
 
       .friend-card img {
         display: block;
-        width: min(100%, 175px);
-        height: 175px;
+        width: min(100%, 145px);
+        height: 145px;
         object-fit: contain;
-        margin: 0 auto 12px;
+        margin: 0 auto 8px;
       }
 
       .friend-name {
@@ -236,9 +243,9 @@
       .spotlight {
         position: absolute;
         inset: 0;
-        padding: clamp(20px, 4vw, 34px);
+        padding: clamp(14px, 3vw, 26px);
         display: grid;
-        gap: 18px;
+        gap: 12px;
         align-items: center;
         justify-items: center;
         opacity: 0;
@@ -260,7 +267,7 @@
         width: min(100%, 560px);
         background: rgba(255, 255, 255, 0.92);
         border-radius: 30px;
-        padding: 22px;
+        padding: 16px;
         box-shadow: 0 22px 42px rgba(54, 32, 57, 0.16);
       }
 
@@ -269,7 +276,7 @@
       }
 
       .spotlight-figure img {
-        width: min(100%, 280px);
+        width: min(100%, 190px);
         display: block;
         margin: 0 auto;
         filter: drop-shadow(0 14px 24px rgba(0, 0, 0, 0.16));
@@ -277,18 +284,19 @@
       }
 
       .spotlight-copy {
-        margin-top: 16px;
+        margin-top: 10px;
       }
 
       .spotlight-copy h3 {
-        margin-bottom: 8px;
-        font-size: 1.6rem;
+        margin-bottom: 6px;
+        font-size: 1.35rem;
       }
 
       .spotlight-copy p {
-        margin: 0 0 14px;
+        margin: 0 0 10px;
         color: var(--muted);
-        line-height: 1.65;
+        line-height: 1.45;
+        font-size: 0.92rem;
       }
 
       .spotlight audio {
@@ -297,7 +305,7 @@
 
       .spotlight-actions {
         display: flex;
-        gap: 12px;
+        gap: 10px;
         justify-content: center;
         flex-wrap: wrap;
       }
@@ -337,89 +345,109 @@
 
       @media (max-width: 720px) {
         .scene {
-          padding-inline: 14px;
+          padding: 10px;
         }
 
         .friends-shell {
-          padding: 16px;
+          padding: 12px;
         }
 
         .friends-header h2 {
-          font-size: 1.9rem;
-          margin-bottom: 8px;
+          font-size: 1.55rem;
+          margin-bottom: 6px;
         }
 
         .friends-header p {
-          font-size: 0.92rem;
-          line-height: 1.45;
+          font-size: 0.84rem;
+          line-height: 1.35;
         }
 
         .friend-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 10px;
-          margin-top: 18px;
+          gap: 8px;
+          margin-top: 12px;
         }
 
         .friend-card {
-          padding: 12px 10px 10px;
-          border-radius: 22px;
+          padding: 10px 8px 8px;
+          border-radius: 18px;
         }
 
         .friend-card img {
-          width: min(100%, 120px);
-          height: 120px;
-          margin-bottom: 8px;
+          width: min(100%, 92px);
+          height: 92px;
+          margin-bottom: 6px;
         }
 
         .friend-name {
-          font-size: 0.92rem;
+          font-size: 0.8rem;
         }
 
         .friend-hint {
-          font-size: 0.75rem;
+          font-size: 0.68rem;
         }
 
         .friend-card[data-friend="ritu"] {
           grid-column: 1 / -1;
-          width: min(48%, 180px);
+          width: min(42%, 150px);
           justify-self: center;
         }
 
         .spotlight {
-          gap: 10px;
+          gap: 8px;
         }
 
         .spotlight-card {
-          padding: 14px;
-          border-radius: 22px;
+          padding: 12px;
+          border-radius: 18px;
         }
 
         .spotlight-figure img {
-          width: min(100%, 170px);
+          width: min(100%, 135px);
         }
 
         .spotlight-copy {
-          margin-top: 10px;
+          margin-top: 8px;
         }
 
         .spotlight-copy h3 {
-          font-size: 1.25rem;
+          font-size: 1.05rem;
           margin-bottom: 6px;
         }
 
         .spotlight-copy p {
-          font-size: 0.88rem;
-          line-height: 1.45;
-          margin-bottom: 10px;
+          font-size: 0.78rem;
+          line-height: 1.35;
+          margin-bottom: 8px;
         }
 
         .spotlight-actions {
-          gap: 8px;
+          gap: 6px;
         }
 
         .back-chip {
-          padding: 12px 18px;
+          padding: 10px 16px;
+          font-size: 0.82rem;
+        }
+      }
+
+      @media (max-height: 760px) {
+        .hero-sticker {
+          width: min(200px, 44vw);
+          margin: 12px auto 10px;
+        }
+
+        .lead {
           font-size: 0.92rem;
+          line-height: 1.45;
+        }
+
+        .spotlight-card {
+          padding: 12px;
+        }
+
+        .spotlight-figure img {
+          width: min(100%, 120px);
         }
       }
     </style>
@@ -519,6 +547,13 @@
     </section>
 
     <script>
+      function setViewportUnit() {
+        document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+      }
+
+      setViewportUnit();
+      window.addEventListener("resize", setViewportUnit);
+
       const scenes = Array.from(document.querySelectorAll(".scene"));
       const openFriendsBtn = document.getElementById("openFriendsBtn");
       const heroSticker = document.getElementById("heroSticker");
