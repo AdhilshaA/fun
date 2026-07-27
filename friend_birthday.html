@@ -330,12 +330,87 @@
           padding-inline: 14px;
         }
 
+        .friends-shell {
+          padding: 16px;
+        }
+
+        .friends-header h2 {
+          font-size: 1.9rem;
+          margin-bottom: 8px;
+        }
+
+        .friends-header p {
+          font-size: 0.92rem;
+          line-height: 1.45;
+        }
+
         .friend-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 10px;
+          margin-top: 18px;
+        }
+
+        .friend-card {
+          padding: 12px 10px 10px;
+          border-radius: 22px;
+        }
+
+        .friend-card img {
+          width: min(100%, 120px);
+          height: 120px;
+          margin-bottom: 8px;
+        }
+
+        .friend-name {
+          font-size: 0.92rem;
+        }
+
+        .friend-hint {
+          font-size: 0.75rem;
+        }
+
+        .friend-card[data-friend="ritu"] {
+          grid-column: 1 / -1;
+          width: min(48%, 180px);
+          justify-self: center;
+        }
+
+        .spotlight {
+          margin-top: 16px;
+          gap: 10px;
         }
 
         .spotlight-card {
-          padding: 18px;
+          padding: 14px;
+          border-radius: 22px;
+        }
+
+        .spotlight-figure img {
+          width: min(100%, 170px);
+        }
+
+        .spotlight-copy {
+          margin-top: 10px;
+        }
+
+        .spotlight-copy h3 {
+          font-size: 1.25rem;
+          margin-bottom: 6px;
+        }
+
+        .spotlight-copy p {
+          font-size: 0.88rem;
+          line-height: 1.45;
+          margin-bottom: 10px;
+        }
+
+        .spotlight-actions {
+          gap: 8px;
+        }
+
+        .back-chip {
+          padding: 12px 18px;
+          font-size: 0.92rem;
         }
       }
     </style>
