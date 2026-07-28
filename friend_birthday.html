@@ -39,8 +39,16 @@
         font-family: "Poppins", sans-serif;
         color: var(--ink);
         background:
-          radial-gradient(circle at top left, rgba(255, 255, 255, 0.6), transparent 38%),
-          radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.4), transparent 30%),
+          radial-gradient(
+            circle at top left,
+            rgba(255, 255, 255, 0.6),
+            transparent 38%
+          ),
+          radial-gradient(
+            circle at bottom right,
+            rgba(255, 255, 255, 0.4),
+            transparent 30%
+          ),
           linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
         overflow: hidden;
       }
@@ -62,7 +70,9 @@
         inset: 0;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.45s ease, transform 0.45s ease;
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
         padding: 18px 14px;
         overflow: hidden;
         display: flex;
@@ -77,6 +87,8 @@
       }
 
       .scene-inner {
+        position: relative;
+        z-index: 2;
         width: min(980px, 100%);
         text-align: center;
         max-height: 100%;
@@ -170,7 +182,10 @@
       .friend-card,
       .back-chip {
         border: none;
-        transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.22s ease;
+        transition:
+          transform 0.22s ease,
+          box-shadow 0.22s ease,
+          opacity 0.22s ease;
       }
 
       .primary-btn,
@@ -223,7 +238,10 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 12px;
         margin-top: 6px;
-        transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+        transition:
+          opacity 0.35s ease,
+          transform 0.35s ease,
+          filter 0.35s ease;
       }
 
       .friend-grid.is-hidden {
@@ -273,7 +291,9 @@
         opacity: 0;
         transform: scale(0.96);
         pointer-events: none;
-        transition: opacity 0.35s ease, transform 0.35s ease;
+        transition:
+          opacity 0.35s ease,
+          transform 0.35s ease;
         background: rgba(255, 249, 253, 0.78);
         backdrop-filter: blur(10px);
         z-index: 5;
@@ -333,11 +353,16 @@
       }
 
       .back-chip {
-        background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 241, 219, 0.95));
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.95),
+          rgba(255, 241, 219, 0.95)
+        );
       }
 
       .floating-sparkle {
-        position: fixed;
+        position: absolute;
+        bottom: -24px;
         pointer-events: none;
         z-index: 1;
         font-size: 18px;
@@ -482,12 +507,11 @@
           <p class="eyebrow">Birthday surprise</p>
           <div class="scene-copy">
             <h1>Hey beautiful.<br />Happy Birthday!</h1>
-            <p class="lead">
-            </p>
+            <p class="lead"></p>
           </div>
 
           <img
-            src="assets-ritu/images/pic1.png"
+            src="assets-ritu\bday_pack\1785268646291(1).png"
             alt="Birthday sticker of her"
             id="heroSticker"
             class="hero-sticker"
@@ -508,40 +532,58 @@
           <div class="friends-header">
             <p class="eyebrow">Tap us!</p>
             <h2>Hear from your idiots!</h2>
-            <p>
-              
-            </p>
+            <p></p>
           </div>
 
           <div class="friend-grid" id="friendGrid">
             <button class="friend-card" data-friend="friend2">
-              <img src="assets-ritu/images/pic1.png" alt="Friend sticker one" style="width:100%;"/>
+              <img
+                src="assets-ritu/bday_pack/IMG-20260729-WA0009.png"
+                alt="Friend sticker one"
+                style="width: 100%"
+              />
               <span class="friend-name">Idiot One</span>
-              <span class="friend-hint">The loud one</span>
+              <span class="friend-hint">Ragebaiter</span>
             </button>
 
             <button class="friend-card" data-friend="friend3">
-              <img src="assets-ritu/images/pic1.png" alt="Friend sticker two" style="width:100%;"/>
+              <img
+                src="assets-ritu\bday_pack\IMG_20260729_014230_183.png"
+                alt="Friend sticker two"
+                style="width: 100%"
+              />
               <span class="friend-name">Idiot Two</span>
-              <span class="friend-hint">The soft one</span>
+              <span class="friend-hint">The chaotic one</span>
             </button>
 
             <button class="friend-card" data-friend="friend4">
-              <img src="assets-ritu/images/pic1.png" alt="Friend sticker three" style="width:100%;"/>
+              <img
+                src="assets-ritu\bday_pack\IMG-20260729-WA0007(1).png"
+                alt="Friend sticker three"
+                style="width: 100%"
+              />
               <span class="friend-name">Idiot Three</span>
-              <span class="friend-hint">The chaotic one</span>
+              <span class="friend-hint">Nashedi</span>
             </button>
 
             <button class="friend-card" data-friend="friend5">
-              <img src="assets-ritu/images/pic1.png" alt="Friend sticker four" style="width:100%;"/>
+              <img
+                src="assets-ritu\bday_pack\IMG-20260729-WA0005(1).png"
+                alt="Friend sticker four"
+                style="width: 100%"
+              />
               <span class="friend-name">Idiot Four</span>
-              <span class="friend-hint">The chaotic one</span>
+              <span class="friend-hint">Dedhasura</span>
             </button>
 
             <button class="friend-card" data-friend="ritu">
-              <img src="assets-ritu/images/pic1.png" alt="Bonus sticker" style="width:100%;"/>
-              <span class="friend-name">Bonus Idiot</span>
-              <span class="friend-hint">The one who started this</span>
+              <img
+                src="assets-ritu/bday_pack/IMG-20260729-WA0010.png"
+                alt="Bonus sticker"
+                style="width: 100%"
+              />
+              <span class="friend-name">Mega Idiot</span>
+              <span class="friend-hint">Book Boyfriend</span>
             </button>
           </div>
 
@@ -559,7 +601,9 @@
             </div>
 
             <div class="spotlight-actions">
-              <button id="backToGridBtn" class="back-chip">Back to other idiots</button>
+              <button id="backToGridBtn" class="back-chip">
+                Back to other idiots
+              </button>
             </div>
           </div>
         </div>
@@ -568,7 +612,10 @@
 
     <script>
       function setViewportUnit() {
-        document.documentElement.style.setProperty("--vh", `${window.innerHeight * 0.01}px`);
+        document.documentElement.style.setProperty(
+          "--vh",
+          `${window.innerHeight * 0.01}px`,
+        );
       }
 
       setViewportUnit();
@@ -588,34 +635,34 @@
 
       const friendData = {
         friend2: {
-          name: "Idiot One",
-          note: "The loud one who somehow turns every message into a full event.",
-          sticker: "images/goma-peach.gif",
-          audio: "assets-ritu/audio-notes/audio1-friend2.mp3",
+          name: "Ragebaiter",
+          note: "Can boil your blood in a matter of minutes!",
+          sticker: "assets-ritu/bday_pack/IMG-20260729-WA0009.png",
+          audio: "assets-ritu/bday_pack/AUD-20260728-WA0003.mp3",
         },
         friend3: {
-          name: "Idiot Two",
-          note: "The soft one. The emotional support system. The one with the best timing.",
-          sticker: "images/goma-peach2.gif",
-          audio: "assets-ritu/audio-notes/audio1-friend3.mp3",
+          name: "The chaotic one",
+          note: "Looks like trouble, acts like a shield.",
+          sticker: "assets-ritu/bday_pack/IMG_20260729_014230_183.png",
+          audio: "assets-ritu/bday_pack/AUD-20260728-WA0004.mp3",
         },
         friend4: {
-          name: "Idiot Three",
-          note: "The chaotic one. High energy, low chill, strong opinions.",
-          sticker: "images/goma-peach3.gif",
-          audio: "assets-ritu/audio-notes/audio1-friend4.mp3",
+          name: "Nashedi",
+          note: "In the nasha of your love!",
+          sticker: "assets-ritu/bday_pack/IMG-20260729-WA0007(1).png",
+          audio: "assets-ritu/bday_pack/AUD-20260728-WA0002.mp3",
         },
         friend5: {
-          name: "Idiot Four",
-          note: "The chaotic one. High energy, low chill, strong opinions.",
-          sticker: "images/goma-peach3.gif",
-          audio: "assets-ritu/audio-notes/audio1-friend4.mp3",
+          name: "Dedhasura",
+          note: "The only ladka wala",
+          sticker: "assets-ritu/bday_pack/IMG-20260729-WA0005(1).png",
+          audio: "assets-ritu/bday_pack/AUD-20260728-WA0001.mp3",
         },
         ritu: {
-          name: "Bonus Idiot",
-          note: "A tiny extra note because no birthday page is complete without the original menace.",
-          sticker: "images/goma-peach4.gif",
-          audio: "assets-ritu/audio-notes/audio1-ritu.mp3",
+          name: "Book Boyfriend",
+          note: "Keeps the bar high and the heart higher!",
+          sticker: "assets-ritu/bday_pack/IMG-20260729-WA0010.png",
+          audio: "assets-ritu/bday_pack/Ritu.mp3",
         },
       };
 
@@ -637,12 +684,16 @@
 
         setInterval(() => {
           const sparkle = document.createElement("div");
+          const activeScene =
+            document.querySelector(".scene.active") || document.body;
+
           sparkle.className = "floating-sparkle";
-          sparkle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-          sparkle.style.left = `${Math.random() * 100}vw`;
+          sparkle.textContent =
+            symbols[Math.floor(Math.random() * symbols.length)];
+          sparkle.style.left = `${Math.random() * 100}%`;
           sparkle.style.animationDuration = `${6 + Math.random() * 4}s`;
           sparkle.style.setProperty("--drift", `${Math.random() * 70 - 35}px`);
-          document.body.appendChild(sparkle);
+          activeScene.appendChild(sparkle);
 
           setTimeout(() => sparkle.remove(), 11000);
         }, 700);
