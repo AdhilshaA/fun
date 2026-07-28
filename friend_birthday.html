@@ -9,6 +9,37 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;800&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="preload"
+      as="image"
+      href="assets-ritu/bday_pack/1785268646291(1).png"
+      fetchpriority="high"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets-ritu/bday_pack/IMG-20260729-WA0009.png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets-ritu/bday_pack/IMG_20260729_014230_183.png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets-ritu/bday_pack/IMG-20260729-WA0007(1).png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets-ritu/bday_pack/IMG-20260729-WA0005(1).png"
+    />
+    <link
+      rel="preload"
+      as="image"
+      href="assets-ritu/bday_pack/IMG-20260729-WA0010.png"
+    />
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
@@ -51,6 +82,38 @@
           ),
           linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
         overflow: hidden;
+      }
+
+      body.is-loading {
+        overflow: hidden;
+      }
+
+      body.is-loading .scene {
+        visibility: hidden;
+      }
+
+      .page-loader {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        display: grid;
+        place-items: center;
+        background:
+          radial-gradient(
+            circle at top left,
+            rgba(255, 255, 255, 0.72),
+            transparent 40%
+          ),
+          linear-gradient(135deg, var(--bg-a), var(--bg-b) 52%, var(--bg-c));
+        color: #7c3258;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        transition: opacity 0.28s ease;
+      }
+
+      body:not(.is-loading) .page-loader {
+        opacity: 0;
+        pointer-events: none;
       }
 
       button,
@@ -242,6 +305,26 @@
           opacity 0.35s ease,
           transform 0.35s ease,
           filter 0.35s ease;
+      }
+
+      @media (min-width: 721px) {
+        .friend-grid {
+          grid-template-columns: repeat(6, minmax(0, 1fr));
+          max-width: 840px;
+          margin: 6px auto 0;
+        }
+
+        .friend-grid .friend-card {
+          grid-column: span 2;
+        }
+
+        .friend-grid .friend-card:nth-child(4) {
+          grid-column: 2 / span 2;
+        }
+
+        .friend-grid .friend-card:nth-child(5) {
+          grid-column: 4 / span 2;
+        }
       }
 
       .friend-grid.is-hidden {
@@ -500,7 +583,8 @@
     </style>
   </head>
 
-  <body>
+  <body class="is-loading">
+    <div class="page-loader" id="pageLoader">Loading your idiots...</div>
     <section class="scene active" id="scene1">
       <div class="scene-inner">
         <div class="hero-shell">
@@ -511,10 +595,13 @@
           </div>
 
           <img
-            src="assets-ritu\bday_pack\1785268646291(1).png"
+            src="assets-ritu/bday_pack/1785268646291(1).png"
             alt="Birthday sticker of her"
             id="heroSticker"
             class="hero-sticker"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
           />
 
           <div class="intro-actions">
@@ -548,7 +635,7 @@
 
             <button class="friend-card" data-friend="friend3">
               <img
-                src="assets-ritu\bday_pack\IMG_20260729_014230_183.png"
+                src="assets-ritu/bday_pack/IMG_20260729_014230_183.png"
                 alt="Friend sticker two"
                 style="width: 100%"
               />
@@ -558,7 +645,7 @@
 
             <button class="friend-card" data-friend="friend4">
               <img
-                src="assets-ritu\bday_pack\IMG-20260729-WA0007(1).png"
+                src="assets-ritu/bday_pack/IMG-20260729-WA0007(1).png"
                 alt="Friend sticker three"
                 style="width: 100%"
               />
@@ -568,7 +655,7 @@
 
             <button class="friend-card" data-friend="friend5">
               <img
-                src="assets-ritu\bday_pack\IMG-20260729-WA0005(1).png"
+                src="assets-ritu/bday_pack/IMG-20260729-WA0005(1).png"
                 alt="Friend sticker four"
                 style="width: 100%"
               />
@@ -616,6 +703,31 @@
           "--vh",
           `${window.innerHeight * 0.01}px`,
         );
+      }
+
+      function waitForImage(img) {
+        if (img.complete && img.naturalWidth > 0) {
+          return Promise.resolve();
+        }
+
+        return new Promise((resolve) => {
+          const done = () => resolve();
+          img.addEventListener("load", done, { once: true });
+          img.addEventListener("error", done, { once: true });
+        });
+      }
+
+      function waitForCriticalImages() {
+        const images = Array.from(document.querySelectorAll("img"));
+        const allImages = Promise.all(images.map(waitForImage));
+        const timeout = new Promise((resolve) => setTimeout(resolve, 4000));
+
+        return Promise.race([allImages, timeout]);
+      }
+
+      async function revealPageWhenReady() {
+        await waitForCriticalImages();
+        document.body.classList.remove("is-loading");
       }
 
       setViewportUnit();
@@ -749,6 +861,7 @@
       });
 
       floatSparkles();
+      revealPageWhenReady();
     </script>
   </body>
 </html>
